@@ -1,6 +1,8 @@
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
+
 let AccountModel = {};
 const iterations = 10000;
 const saltLength = 64;
@@ -28,7 +30,7 @@ const AccountSchema = new mongoose.Schema({
   },
 });
 
-AccountSchema.statics.toAPI = (doc) => ({
+AccountSchema.statics.toAPI = doc => ({
   // _id is built into your mongo document and is guaranteed to be unique
   username: doc.username,
   _id: doc._id,
