@@ -22,6 +22,12 @@ const DomoSchema = new mongoose.Schema({
     required: true,
   },
 
+  description: {
+    type: String,
+    required: true,
+    default: 'Domo Arigato',
+  },
+
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
