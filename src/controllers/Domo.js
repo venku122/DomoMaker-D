@@ -8,10 +8,25 @@ const makerPage = (req, res) => {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });
     }
-
+    console.log("sending Domo Docs" + docs);
     return res.render('app', { csrfToken: req.csrfToken(), domos: docs });
   });
 };
+
+const deleteDomos = (req, res) => {
+  console.log('command to delete received');
+  Domo.DomoModel.deleteByOwner(req.session.account._id, (err, docs) => {
+    if(err) {
+      console.log(err);
+      return res.status(400).json({error: 'An Error occurred'});
+    }
+
+    return res.render('app', { csrfToken: req.csrfToken(), domos: docs });
+    console.log("page re-rendered");
+    //return res.json({ redirect: '/maker' });
+  });
+};
+
 
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age || !req.body.description) {
@@ -39,3 +54,4 @@ const makeDomo = (req, res) => {
 
 module.exports.makerPage = makerPage;
 module.exports.make = makeDomo;
+module.exports.delete = deleteDomos;

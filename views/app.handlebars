@@ -16,11 +16,17 @@
       <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
       <label for="age">Age: </label>
       <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
+      <label for="description">Description: </label>
       <input id = "domoDesc" type = "text" name = "description" placeholder="Describe Domo Here!"/>
       <input type = "hidden" name = "_csrf" value = {{csrfToken}} />
       <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
     </form>
   </section>
+    <form id="deleteForm" name="deleteForm" action="/delete" method="POST" class="domoForm">
+      <a id="deleteDomos" href="#" class="makeDomoSubmit">Delete All Domos</a>
+      <input type = "hidden" name = "_csrf" value = {{csrfToken}} />
+    </form>
+
   <section id="domos">
     <div class="domo">
       {{#if domos}}
@@ -28,6 +34,7 @@
           <div class = "domo"><img src = "/assets/img/domoface.jpeg" alt = "domo face" class = "domoFace"/>
             <h3 class = "domoName">Name: {{this.name}}</h3>
             <h3 class = "domoAge">Age: {{this.age}}</h3>
+            <p class = "domoDesc">{{this.description}}</p>
           </div>
         {{/each}}
       {{else}}
